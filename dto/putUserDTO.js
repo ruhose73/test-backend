@@ -1,10 +1,9 @@
-module.exports = class AuthDto {
-    uid;
+module.exports = class putUserDto {
+
     email;
     nickname;
 
     constructor(user) {
-        this.uid = user.uid;
         this.email = user.email;
         this.nickname = user.nickname;
     }

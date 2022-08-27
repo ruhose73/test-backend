@@ -16,9 +16,8 @@ class AuthService {
             }
             const userId = uuid.v4();
             const hashedPassword = await bcryptjs.hash(password, 5);
-            const user = await db.query("INSERT INTO users (uid, email, password, nickname) VALUES ($1,$2,$3,$4)", [userId, email, hashedPassword, nickname])
-            //! сделать селект
-            const authDTO = new AuthDTO(user);
+            const user = await db.query("INSERT INTO users (uid, email, password, nickname) VALUES ($1,$2,$3,$4) RETURNING *", [userId, email, hashedPassword, nickname])
+            const authDTO = new AuthDTO(user.rows[0]);
             const token = TokenService.generateToken({ ...authDTO });
             return token;
         } catch (e) {
@@ -30,10 +29,10 @@ class AuthService {
         try {
             const user = await db.query("SELECT * FROM users WHERE email = $1", [email])
             const isPassEquals = await bcryptjs.compare(password, user.rows[0].password);
-            if(!isPassEquals) {
+            if (!isPassEquals) {
                 throw ApiStatus.badRequest("Неверные данные");
             }
-            const authDTO = new AuthDTO(user);
+            const authDTO = new AuthDTO(user.rows[0]);
             const token = TokenService.generateToken({ ...authDTO });
             return token;
         } catch (e) {
@@ -48,19 +47,26 @@ class AuthService {
                 throw ApiStatus.UnauthorizedError();
             }
             return null;
-        } catch(e) {
+        } catch (e) {
             throw ApiStatus.internal(e.message);
         }
     }
 
     async refresh(accessToken) {
         try {
-            const userData = TokenService.refreshAcessToken(accessToken)
-            return userData
-        } catch(e) {
+            const userData = TokenService.validateAccessToken(accessToken)
+            if (!userData) {
+                throw ApiStatus.UnauthorizedError();
+            }
+            const user = await db.query("SELECT * FROM users WHERE email = $1", [userData.email])
+            const authDTO = new AuthDTO(user.rows[0]);
+            const token = TokenService.generateToken({ ...authDTO });
+            return token;
+        } catch (e) {
             throw ApiStatus.internal(e.message);
         }
     }
+    
 }
 
 module.exports = new AuthService();

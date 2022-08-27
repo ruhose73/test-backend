@@ -15,18 +15,18 @@ class AuthController {
             const userData = await AuthService.signin(email, password, nickname);
             return res.json(userData);
         } catch (e) {
-            next(e);
+            return next(ApiStatus.internal(e.message));
         }
     }
 
     //  http://localhost:5000/login
     async login(req, res, next) {
         try {
-            const { email, password} = req.body;
+            const { email, password } = req.body;
             const userData = await AuthService.login(email, password);
             return res.json(userData);
         } catch (e) {
-            next(e);
+            return next(ApiStatus.internal(e.message));
         }
     }
 
@@ -37,10 +37,10 @@ class AuthController {
             await AuthService.logout(accessToken);
             return next(ApiStatus.noContent());
         } catch (e) {
-            next(e);
+            return next(ApiStatus.internal(e.message));
         }
     }
-    
+
     //  http://localhost:5000/refresh
     async refresh(req, res, next) {
         try {
@@ -48,10 +48,9 @@ class AuthController {
             const userData = await AuthService.refresh(accessToken);
             return res.json(userData);
         } catch (e) {
-            next(e);
+            return next(ApiStatus.internal(e.message));
         }
     }
-
 }
 
 module.exports = new AuthController();

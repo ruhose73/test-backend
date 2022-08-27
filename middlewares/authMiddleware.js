@@ -6,7 +6,7 @@ module.exports = function (req, res, next) {
     try {
         if (req.cookies.accessToken != null) {
             const accessToken = req.cookies.accessToken;
-            const userData = TokenService.validateAcessToken(accessToken)
+            const userData = TokenService.validateAccessToken(accessToken)
             if (!userData) {
                 return next(ApiError.UnauthorizedError());
             }
@@ -14,7 +14,7 @@ module.exports = function (req, res, next) {
             next()
         } else {
             const accessToken = req.headers.authorization != null ? req.headers.authorization.split(' ')[1] : null
-            const userData = TokenService.validateAcessToken(accessToken)
+            const userData = TokenService.validateAccessToken(accessToken)
             if (!userData) {
                 return next(ApiError.UnauthorizedError());
             }
