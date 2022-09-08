@@ -42,6 +42,18 @@ class UserController {
             return next(ApiStatus.internal(e.message));
         }
     }
+
+    //  http://localhost:5000/user/tag/my
+    async myTags(req, res, next) {
+        try {
+            const accessToken = req.headers.authorization != null ? req.headers.authorization.split(' ')[1] : null
+            const tags = await UserService.myTags(accessToken)
+            return res.json(tags);
+        } catch (e) {
+            return next(ApiStatus.internal(e.message));
+        }
+    }
+
 }
 
 module.exports = new UserController();

@@ -29,5 +29,10 @@ SELECT * FROM users WHERE email = $1
 
 SELECT * FROM tags  ORDER BY (name) LIMIT 10 OFFSET 1;
 
+SELECT tags.id, tags.creator, tags.name, tags.sortorder, users.nickname, users.uid
+FROM tags LEFT OUTER JOIN users on tags.creator = users.uid
+ORDER BY (sortorder) LIMIT 100 OFFSET 10;
+
+
 
 

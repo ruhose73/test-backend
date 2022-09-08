@@ -25,7 +25,7 @@ router.delete("/user", AuthMiddleware, UserController.delete);
 //  http://localhost:5000/user/tag/:id
 //router.delete("/user/tag/:id", AuthMiddleware, UserController.deleteTag);
 
-//  http://localhost:5000/user/tag/:id
-//router.get("/user/tag/my", AuthMiddleware, UserController.myTags);
+//  http://localhost:5000/user/tag/my
+router.get("/user/tag/my", AuthMiddleware, UserController.myTags);
 
 module.exports = router

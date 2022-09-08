@@ -3,6 +3,7 @@ const ApiStatus = require("../handlers/apiStatus")
 const db = require('../config/database')
 const uuid = require("uuid");
 const PutUserDTO = require("../dto/putUserDTO");
+const UserTagDTO = require("../dto/userTagDTO");
 const TokenService = require("./tokenService");
 
 
@@ -47,6 +48,24 @@ class UserService {
             }
             await db.query("DELETE FROM users WHERE uid = $1", [userData.uid])
             return null
+        } catch (e) {
+            throw ApiStatus.internal(e.message);
+        }
+    }
+
+    async myTags(token) {
+        try {
+            const userData = TokenService.validateAccessToken(token)
+            if (!userData) {
+                throw ApiStatus.UnauthorizedError();
+            }
+            const tagsFullInfo = await db.query("SELECT id,name,sortorder FROM tags WHERE creator = $1", [userData.uid])
+            const data = []
+            tagsFullInfo.rows.forEach((element) => {
+                const tag = new UserTagDTO(element)
+                data.push(tag)
+            });
+            return data
         } catch (e) {
             throw ApiStatus.internal(e.message);
         }
