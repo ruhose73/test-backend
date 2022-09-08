@@ -19,4 +19,13 @@ router.put("/user",
 //  http://localhost:5000/user
 router.delete("/user", AuthMiddleware, UserController.delete);
 
+//  http://localhost:5000/user/tag
+//router.post("/user/tag", AuthMiddleware, UserController.userTags);
+
+//  http://localhost:5000/user/tag/:id
+//router.delete("/user/tag/:id", AuthMiddleware, UserController.deleteTag);
+
+//  http://localhost:5000/user/tag/:id
+//router.get("/user/tag/my", AuthMiddleware, UserController.myTags);
+
 module.exports = router

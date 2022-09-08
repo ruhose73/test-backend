@@ -27,5 +27,7 @@ INSERT INTO users (uid, email, password, nickname) VALUES ($1,$2,$3,$4)
 
 SELECT * FROM users WHERE email = $1
 
+SELECT * FROM tags  ORDER BY (name) LIMIT 10 OFFSET 1;
+
 
 
