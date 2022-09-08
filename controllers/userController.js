@@ -54,6 +54,18 @@ class UserController {
         }
     }
 
+
+    async deleteTag(req,res,next) {
+        try {
+            const accessToken = req.headers.authorization != null ? req.headers.authorization.split(' ')[1] : null
+            const tagId = req.params.id;
+            const deleteTag = await UserService.deleteTag(accessToken, tagId)
+            return res.json(deleteTag)
+        } catch (e) {
+            return next(ApiStatus.internal(e.message));
+        }
+    }
+
 }
 
 module.exports = new UserController();

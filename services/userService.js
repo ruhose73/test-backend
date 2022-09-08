@@ -71,6 +71,25 @@ class UserService {
         }
     }
 
+    async deleteTag(token, tagId) {
+        try{
+            const userData = TokenService.validateAccessToken(token)
+            if (!userData) {
+                throw ApiStatus.UnauthorizedError();
+            }
+            await db.query("DELETE FROM tags WHERE id = $1 AND creator = $2", [tagId, userData.uid])
+            const tagsFullInfo = await db.query("SELECT id, name, sortorder FROM tags WHERE id = $1 AND creator = $2 ", [tagId, userData.uid])
+            console.log(tagsFullInfo)
+            const data = []
+            tagsFullInfo.rows.forEach((element) => {
+                const tag = new UserTagDTO(element)
+                data.push(tag)
+            });
+            return data
+        } catch (e) {
+            throw ApiStatus.internal(e.message);
+        }
+    }
 }
 
 module.exports = new UserService();

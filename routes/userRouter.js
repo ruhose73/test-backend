@@ -23,7 +23,7 @@ router.delete("/user", AuthMiddleware, UserController.delete);
 //router.post("/user/tag", AuthMiddleware, UserController.userTags);
 
 //  http://localhost:5000/user/tag/:id
-//router.delete("/user/tag/:id", AuthMiddleware, UserController.deleteTag);
+router.delete("/user/tag/:id", AuthMiddleware, UserController.deleteTag);
 
 //  http://localhost:5000/user/tag/my
 router.get("/user/tag/my", AuthMiddleware, UserController.myTags);
