@@ -61,7 +61,7 @@ class TagService {
     }
 
     async allTags(inputParams) {
-        //Я решил не изобретать пагинацию и сортировку и сделал ее средствами БД
+        //! Я решил не изобретать пагинацию и сортировку и сделал ее средствами БД
         try {
             const tagsFullInfo = await db.query(`SELECT tags.id, tags.creator, tags.name, tags.sortorder, users.nickname, users.uid ` +
                 `FROM tags LEFT OUTER JOIN users on tags.creator = users.uid` +

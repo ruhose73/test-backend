@@ -65,14 +65,12 @@ class UserController {
         }
     }
 
-    //Проверяем тэги на наличие в базе и добавляем к пользователю пачкой (атомарной операцией)
-    //Пример: Если тэга с id 2 нет в базе то и тэг с id 1 не добавится пользователю
-
-    async userTag(req,res,next) {
+    async userTags(req,res,next) {
         try{
             const accessToken = req.headers.authorization != null ? req.headers.authorization.split(' ')[1] : null
             const tags = req.body
-            
+            const userTag = await UserService.userTag(accessToken, tags)
+            return res.json(userTag)
         } catch(e){
             return next(ApiStatus.internal(e.message));
         }

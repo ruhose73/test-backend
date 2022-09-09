@@ -5,8 +5,7 @@ class TokenService {
 
     generateToken(payload) {
         try {
-            const token = jwt.sign(payload, process.env.JWT_ACCESS_SECRET, { expiresIn: '30m' });
-            //! Не очень понятно почему стрингом, но ТЗ есть ТЗ
+            const token = jwt.sign(payload, process.env.JWT_ACCESS_SECRET, { expiresIn: '30d' });
             const expire = (jwt.decode(token).exp).toString();
             return { token, expire }
         } catch (e) {
