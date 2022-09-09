@@ -54,7 +54,6 @@ class UserController {
         }
     }
 
-
     async deleteTag(req,res,next) {
         try {
             const accessToken = req.headers.authorization != null ? req.headers.authorization.split(' ')[1] : null
@@ -62,6 +61,19 @@ class UserController {
             const deleteTag = await UserService.deleteTag(accessToken, tagId)
             return res.json(deleteTag)
         } catch (e) {
+            return next(ApiStatus.internal(e.message));
+        }
+    }
+
+    //Проверяем тэги на наличие в базе и добавляем к пользователю пачкой (атомарной операцией)
+    //Пример: Если тэга с id 2 нет в базе то и тэг с id 1 не добавится пользователю
+
+    async userTag(req,res,next) {
+        try{
+            const accessToken = req.headers.authorization != null ? req.headers.authorization.split(' ')[1] : null
+            const tags = req.body
+            
+        } catch(e){
             return next(ApiStatus.internal(e.message));
         }
     }
