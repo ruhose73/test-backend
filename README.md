@@ -8,18 +8,18 @@
 
 Создайте базу данных c именем `test_backend`
 <p align="left">
-    <img src="./doc-images/1.png" />
+    <img src="https://github.com/ruhose73/test-backend/blob/main/docs/images/1.png" />
 </p>
 
 Затем нажмите restore/восстановить на вкладке созданной базы данных
 <p align="left">
-    <img src="./doc-images/2.png" />
+    <img src="https://github.com/ruhose73/test-backend/blob/main/docs/images/2.png" />
 </p>
 
 Выберите файл `migration-custom.backup` в папке `migration-custom` данного проекта  
 и нажмите restore/восстановить
 <p align="left">
-    <img src="./doc-images/4.png" />
+    <img src=".https://github.com/ruhose73/test-backend/blob/main/docs/images/4.png" />
 </p>
 
 ### Миграция базы данных (терминал)
