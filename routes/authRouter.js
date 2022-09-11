@@ -21,7 +21,7 @@ router.post("/login", AuthController.login);
 router.post("/logout", AuthController.logout);
 
 //  http://localhost:5000/refresh
-router.post("/refresh", AuthController.refresh);
+router.get("/refresh", AuthController.refresh);
 
 
 module.exports = router
