@@ -8,9 +8,11 @@
 
 * Откройте pgAdmin
 * Создайте базу данных c именем `test_backend`
+
 <p align="left">
-  <img src="http://github.com/file-sharing-erp-team/file-sharing-erp/raw/main/images/logo.png" />
+  <img src="http://github.com/ruhose73/test-backend/blob/main/doc-images/Screenshot_1.jpg" />
 </p>
+
 * Затем выполните команду 
 
 ### Установка и запуск сервера
