@@ -36,7 +36,7 @@ app.use(cookieParser());
 app.use(cors())
 app.use(express.json())
 
-//!  http://localhost:5000/
+//!  http://localhost:5000/docs
 
 app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerSpecs));
 
