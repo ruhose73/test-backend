@@ -115,3 +115,42 @@
  *                 example: "Ошибка сервера"
  */
 
+//! REFRESH
+/**
+ * @swagger
+ * /refresh:
+ *  get:
+ *   summary: Рефреш токена
+ *   tags: [Auth]
+ *   security:
+ *   - bearerAuth: []
+ *   parameters:
+ *   - in: header
+ *     name: Token
+ *     description: Bearer Token
+ *     schema: 
+ *       type: string
+ *       format: JWT
+ *       example: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJDb2RleCBUZWFtIiwic3ViIjoiYXV0aCIsImV4cCI6MTUwNTQ2Nzc1Njg2OSwiaWF0IjoxNTA1NDY3MTUyMDY5LCJ1c2VyIjoxfQ.0ynjTRZT9Uk77TnGy_g9Mxi1decLBjKxQK6e2dVzDJo"
+ *   responses:
+ *       200:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/SigninLoginRes'
+ *       403:
+ *         description: Unauthorized error
+ *         content:
+ *             application/json: 
+ *               schema: 
+ *                 type: string
+ *                 example: "Токен не валиден"
+ *       500:
+ *         description: Internal error
+ *         content:
+ *             application/json: 
+ *               schema: 
+ *                 type: string
+ *                 example: "Ошибка сервера"
+ */
+

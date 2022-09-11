@@ -134,13 +134,13 @@
  *          offset:
  *              type: integer
  *              description: Сдвиг по записям
- *              example: Qwerty
+ *              example: 10
  *          length:
  *              type: integer
  *              description: Количество записей
- *              example: 4cf7e8f8-b6cc-40c2-8fba-e63e62d53995
+ *              example: 20
  *          quantity:
  *              type: integer
  *              description: Общее количество элементов в выборке
- *              example: 4cf7e8f8-b6cc-40c2-8fba-e63e62d53995
+ *              example: 20
  */

@@ -224,7 +224,7 @@
  * @swagger
  * /tag?sortByOrder&sortByName&offset=10&length=10:
  *  get:
- *   summary: Удалить тег по id
+ *   summary: Получить теги
  *   tags: [Tags]
  *   security:
  *   - bearerAuth: []
