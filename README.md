@@ -4,16 +4,23 @@
 
 ### Миграция базы данных
 
-#### Способ миграции с помощью PgAdmin
+Откройте pgAdmin
 
-* Откройте pgAdmin
-* Создайте базу данных c именем `test_backend`
-
-<p align="left">
-  <img src="http://github.com/ruhose73/test-backend/blob/main/doc-images/Screenshot_1.jpg" />
+Создайте базу данных c именем `test_backend`
+<p align="center">
+    <img src="./doc-images/1.png" />
 </p>
 
-* Затем выполните команду 
+Затем нажмите restore/восстановить на вкладке созданной базы данных
+<p align="center">
+    <img src="./doc-images/2.png" />
+</p>
+
+Выберите файл `migration-custom.backup` в папке `migration-custom` данного проекта и нажмите restore/восстановить
+<p align="center">
+    <img src="./doc-images/4.png" />
+</p>
+
 
 ### Установка и запуск сервера
 
