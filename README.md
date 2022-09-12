@@ -41,7 +41,8 @@ SELECT tags.id, tags.creator, tags.name, tags.sortorder, users.nickname, users.u
             { sortByOrder: req.query.sortByOrder == '' ? true : false, 
             offset: req.query.offset ? req.query.offset : 0,
             sortByName: req.query.sortByName == '' ? true : false , 
-            length: req.query.length ? req.query.length : 10 });
+            length: req.query.length ? req.query.length : 10 
+            });
 ```
 
 #### Миграция базы данных
