@@ -17,6 +17,7 @@ router.post(
 router.post("/login", AuthController.login);
 
 //  В ТЗ вообще POST но я бы поставил GET
+
 //  http://localhost:5000/logout
 router.post("/logout", AuthController.logout);
 

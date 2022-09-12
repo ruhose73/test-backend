@@ -10,13 +10,13 @@ const AuthMiddleware = require("../middlewares/authMiddleware")
 router.post("/tag", AuthMiddleware, TagController.createTag);
 
 //  http://localhost:5000/tag/:id
-router.get("/tag/:id", TagController.getTagById)
+router.get("/tag/:id", AuthMiddleware, TagController.getTagById)
 
 //  http://localhost:5000/tag/:id
-router.put("/tag/:id", TagController.updateTag)
+router.put("/tag/:id", AuthMiddleware, TagController.updateTag)
 
 //  http://localhost:5000/tag/:id
-router.delete("/tag/:id", TagController.deleteTag)
+router.delete("/tag/:id", AuthMiddleware, TagController.deleteTag)
 
 //  http://localhost:5000/tag
 router.get("/tag", AuthMiddleware, TagController.allTags);
