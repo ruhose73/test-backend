@@ -29,7 +29,9 @@
 ```sql
 SELECT tags.id, tags.creator, tags.name, tags.sortorder, users.nickname, users.uid ` +
                 `FROM tags LEFT OUTER JOIN users on tags.creator = users.uid` +
-                ` ORDER BY (${inputParams.sortByOrder == true ? 'sortorder' : inputParams.sortByName == true ? 'name' : 'id'}) LIMIT $1 OFFSET $2
+                ` ORDER BY (${inputParams.sortByOrder == true ? 
+                'sortorder' : inputParams.sortByName == true ? 'name' : 'id'}) 
+                LIMIT $1 OFFSET $2
 ```
 
 В случае отсутствия какого либо параметра задаются значения по умолчанию
