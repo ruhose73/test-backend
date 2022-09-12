@@ -1,58 +1,57 @@
 # Тестовое задание Backend Node
 
-## Установка
+## Установка и запуск
 
-### Миграция базы данных (PgAdmin)
+* [Установка и запуск без докера](https://github.com/ruhose73/test-backend/blob/main/docs/CLEAR.MD)
+* [Установка и запуск с докером](https://github.com/ruhose73/test-backend/blob/main/docs/DOCKER.MD)
 
-Откройте pgAdmin
-
-Создайте базу данных c именем `test_backend`
-<p align="left">
-    <img src="https://github.com/ruhose73/test-backend/blob/main/docs/images/1.png" />
-</p>
-
-Затем нажмите restore/восстановить на вкладке созданной базы данных
-<p align="left">
-    <img src="https://github.com/ruhose73/test-backend/blob/main/docs/images/2.png" />
-</p>
-
-Выберите файл `migration-custom.backup` в папке `migration-custom` данного проекта  
-и нажмите restore/восстановить
-<p align="left">
-    <img src=".https://github.com/ruhose73/test-backend/blob/main/docs/images/4.png" />
-</p>
-
-### Миграция базы данных (терминал)
-
-Создайте базу данных c именем `test_backend`
-
-```sql
-CREATE DATABASE test_backend WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'Russian_Russia.1251';
-```
-
-Восстановите базу данных с помощью утилиты `pg-restore`
-
-```
-pg_restore \
--v
--h <host> \
--U <user_name>
--d <database_name> archive.dump
-```
-
-где:
-
-* `<host>` — IP-адрес или DNS-имя мастер-хоста принимающего кластера;
-* `<user_name>` — имя пользователя базы данных;
-* `<database_name>` — имя базы данных.
-* `archive.dump` — Путь до файла `migration-custom.backup`;
-
-### Установка и запуск сервера
-
-* В папке репозитория выполните команду в терминале `npm install`
-* Затем выполните команду `npm run server`
-
-### Сервера:
+## Сервера
 
 * Сервер API: ```http://localhost:5000```
 * Сервер документации: ```http://localhost:5000/docs```
+
+### Что было сделано
+
+* Выполнены все обязательные требования
+* Документация SWAGGER
+* Сделана конфигурация для запуска в Docker контейнере
+* Во время разработки не использовась ORM
+* По возможности использовались DTO
+* Написаны прослойки для обработки ошибок и отправки статус кодов
+* Написана прослойка для проведения механизма авторизации
+
+### Комментарии
+
+#### Сортировка и пагинация
+
+Механизм сортировки и пагинации сделан на стороне базы данных
+
+```sql
+SELECT tags.id, tags.creator, tags.name, tags.sortorder, users.nickname, users.uid ` +
+                `FROM tags LEFT OUTER JOIN users on tags.creator = users.uid` +
+                ` ORDER BY (${inputParams.sortByOrder == true ? 'sortorder' : inputParams.sortByName == true ? 'name' : 'id'}) LIMIT $1 OFFSET $2
+```
+
+В случае отсутствия какого либо параметра задаются значения по умолчанию
+
+```js
+        const getTags = await TagService.allTags(
+            { sortByOrder: req.query.sortByOrder == '' ? true : false, 
+            offset: req.query.offset ? req.query.offset : 0,
+            sortByName: req.query.sortByName == '' ? true : false , 
+            length: req.query.length ? req.query.length : 10 });
+```
+
+#### Миграция базы данных
+
+Дамп базы данных сделан в двух форматах:
+
+* `custom` - формат PostgreSQL (через `pg_restore`)
+* `plain` - формат SQL (если хочется ручками)
+
+Дампы хранятся в папке `migration-pg` в проекте
+
+#### SWAGGER
+
+Задокументированы все запросы данного API  
+Документация доступа после запуска проекта по адресу `http://localhost:5000/docs/`
