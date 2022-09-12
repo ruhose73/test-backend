@@ -37,12 +37,12 @@ SELECT tags.id, tags.creator, tags.name, tags.sortorder, users.nickname, users.u
 В случае отсутствия какого либо параметра задаются значения по умолчанию
 
 ```js
-        const getTags = await TagService.allTags(
-            { sortByOrder: req.query.sortByOrder == '' ? true : false, 
+        const getTags = await TagService.allTags({ 
+            sortByOrder: req.query.sortByOrder == '' ? true : false, 
             offset: req.query.offset ? req.query.offset : 0,
             sortByName: req.query.sortByName == '' ? true : false , 
             length: req.query.length ? req.query.length : 10 
-            });
+        });
 ```
 
 #### Миграция базы данных
