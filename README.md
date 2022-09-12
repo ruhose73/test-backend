@@ -54,4 +54,4 @@ SELECT tags.id, tags.creator, tags.name, tags.sortorder, users.nickname, users.u
 #### SWAGGER
 
 Задокументированы все запросы данного API  
-Документация доступа после запуска проекта по адресу `http://localhost:5000/docs/`
+Документация доступна после запуска проекта по адресу `http://localhost:5000/docs/`
