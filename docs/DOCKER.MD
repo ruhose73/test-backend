@@ -13,7 +13,9 @@
 Запустите CLI контейнера и выполните команду восстановления базы  
 `pg_restore -U postgres -d test_backend /home/migration-custom.backup`
 
-### Сервера:
+## Сервера
 
-* Сервер API: ```http://localhost:5000```
-* Сервер документации: ```http://localhost:5000/docs```
+* Сервер API локальный: `http://localhost:5000`
+* Сервер локальный документации: `http://localhost:5000/docs`
+* Сервер API: `http://51.250.11.190:5000`
+* Сервер документации: `http://51.250.11.190:5000/docs/`
